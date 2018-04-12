@@ -20,6 +20,7 @@ import {
 } from 'react-native';
 
 import RNFetchBlob from 'react-native-fetch-blob';
+import {WebView} from "react-native";
 
 const SHA1 = require('crypto-js/sha1');
 import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource';
@@ -355,15 +356,8 @@ export default class Pdf extends Component {
                 );
             } else if (Platform.OS === "ios") {
                 return (
-                    <PdfView
-                        {...this.props}
-                        style={[{backgroundColor: '#EEE'}, this.props.style]}
-                        path={this.state.path}
-                        onLoadComplete={this.props.onLoadComplete}
-                        onPageChanged={this.props.onPageChanged}
-                        onError={this._onError}
-                        onPageSingleTap={this.props.onPageSingleTap}
-                        onScaleChanged={this.props.onScaleChanged}
+                    <WebView
+                        source={{uri:this.state.path}}
                     />
                 );
             } else {
